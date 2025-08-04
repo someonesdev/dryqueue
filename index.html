@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Time Tracker</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -12,17 +13,13 @@
     />
     <style>
       /* --- Hiding Scrollbar Styles --- */
-      /* For Webkit browsers (Chrome, Safari, Edge, Opera) */
       body::-webkit-scrollbar {
-        display: none; /* Hides the scrollbar */
+        display: none;
       }
-
-      /* For Firefox */
       body {
-        scrollbar-width: none; /* Hides the scrollbar */
+        scrollbar-width: none;
       }
 
-      /* --- End Hiding Scrollbar Styles --- */
       a {
         color: white;
       }
@@ -39,7 +36,6 @@
         --modal-border: #333333;
         --textarea-bg: #ffffff;
         --textarea-text: #000000;
-        /* New variables for help section */
         --help-section-bg: #f9f9f9;
         --help-section-border: #cccccc;
         --help-section-text-color-light: #333333;
@@ -58,7 +54,6 @@
         --modal-border: #666666;
         --textarea-bg: #404040;
         --textarea-text: #ffffff;
-        /* Dark mode variables for help section */
         --help-section-bg: #222222;
         --help-section-border: #555555;
         --help-section-text-color-dark: #cccccc;
@@ -68,27 +63,26 @@
         background-color: var(--bg-color);
         color: var(--text-color);
         transition: background-color 0.3s, color 0.3s;
-        font-family: Arial, sans-serif; /* Default fallback */
+        font-family: Arial, sans-serif;
       }
 
       #page-title {
         text-align: center;
         color: var(--text-color);
         margin-top: 20px;
-        margin-bottom: 5px; /* Adjusted margin to bring GIF closer */
+        margin-bottom: 5px;
         font-size: 2.5em;
-        /* Apply Funnel Display to the page title */
         font-family: "Funnel Display", sans-serif;
-        font-weight: 800; /* Example: adjust weight as desired within 300-800 */
+        font-weight: 800;
       }
 
       .gif-container {
         text-align: center;
-        margin: 30px auto; /* Centered with auto margins, added vertical margin */
+        margin: 30px auto;
       }
 
       .gif-container img {
-        width: 300px; /* Adjust size as needed */
+        width: 300px;
         height: auto;
       }
 
@@ -98,9 +92,9 @@
         bottom: 20px;
         right: 20px;
         display: flex;
-        flex-direction: column; /* Stack items vertically */
-        align-items: flex-end; /* Align items to the right */
-        gap: 10px; /* Space between buttons and contact info */
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
         z-index: 1001;
       }
 
@@ -160,7 +154,7 @@
         max-height: 200px;
         position: relative;
         text-align: center;
-        font-family: monospace; /* Keeping monospace for time readability */
+        font-family: monospace;
         overflow: hidden;
         word-wrap: break-word;
         transition: background-color 0.3s, border-color 0.3s;
@@ -233,7 +227,6 @@
         text-align: center;
       }
 
-      /* General button styling for main action buttons */
       button {
         padding: 10px 20px;
         margin-top: 10px;
@@ -249,7 +242,6 @@
         background-color: var(--button-hover);
       }
 
-      /* Style for main action buttons */
       .main-action-btn {
         width: 160px;
         display: block;
@@ -281,7 +273,6 @@
         text-align: center;
       }
 
-      /* Floating modal */
       #editModal {
         position: fixed;
         top: 50%;
@@ -323,7 +314,6 @@
         background-color: rgba(0, 0, 0, 0.7);
       }
 
-      /* Help Section Styles */
       #instructionsSection {
         max-width: 800px;
         margin: 40px auto;
@@ -339,7 +329,6 @@
           box-shadow 0.3s;
       }
 
-      /* Dark mode specific text color for help section */
       [data-theme="dark"] #instructionsSection {
         color: var(--help-section-text-color-dark);
       }
@@ -349,7 +338,7 @@
         margin-bottom: 25px;
         color: var(--text-color);
         font-size: 1.8em;
-        font-family: "Funnel Display", sans-serif; /* Applied Funnel Display here */
+        font-family: "Funnel Display", sans-serif;
       }
 
       #instructionsSection h3 {
@@ -359,7 +348,7 @@
         color: var(--text-color);
         border-bottom: 1px solid var(--help-section-border);
         padding-bottom: 5px;
-        font-family: "Funnel Display", sans-serif; /* Applied Funnel Display here */
+        font-family: "Funnel Display", sans-serif;
       }
 
       #instructionsSection p {
@@ -382,9 +371,9 @@
       #contactInfo {
         font-size: 0.9em;
         color: rgba(255, 255, 255, 0.281);
-        text-align: right; /* Align text to the right within its container */
-        width: 100%; /* Ensure it takes full width of bottom-right-container */
-        margin-top: 0; /* Remove top margin as gap handles spacing */
+        text-align: right;
+        width: 100%;
+        margin-top: 0;
       }
 
       #contactInfo a {
@@ -414,13 +403,6 @@
     </div>
 
     <div id="container">
-      <div class="row-wrapper" id="wrapper-0">
-        <div class="row" id="row-0">
-          <div class="cell" id="cell-0-0"></div>
-          <div class="cell" id="cell-0-1"></div>
-        </div>
-      </div>
-
       <div class="single-column">
         <button id="btnTimestamp" class="main-action-btn">Timestamp</button>
       </div>
@@ -437,7 +419,7 @@
 
     <div style="text-align: center">
       <button id="btnReset" class="main-action-btn" style="margin-top: 10px">
-        Reset All
+        Clear
       </button>
     </div>
 
@@ -445,6 +427,7 @@
       <h2>📋 How to Use the Time Tracker</h2>
 
       <div>
+
         <h3>🕐 Logging Time</h3>
         <p>
           <strong>Timestamp Button:</strong> Click the "Timestamp" button to
@@ -459,8 +442,9 @@
 
         <h3>✏️ Editing Times</h3>
         <p>
-          <strong>Edit Button (✎):</strong> Click the **pencil icon** in the
-          top-right corner of any cell to edit that specific time entry.
+          <strong>Edit Button (✎):</strong> Click the
+          **pencil icon** in the top-right corner of any cell to edit that
+          specific time entry.
         </p>
         <p>
           <strong>Precision Editing:</strong> You can edit times down to the
@@ -495,9 +479,9 @@
         <h3>📊 Calculating Totals</h3>
         <p>
           <strong>TOTAL Button:</strong> Click to calculate the total dry queue
-          time across all logged sessions. Time is automatically rounded up to
-          the nearest minute - any partial seconds will round up to the next
-          full minute.
+          time across all logged sessions. Time is automatically rounded to the
+          nearest minute: 30 seconds or more rounds up to the next minute, while
+          less than 30 seconds rounds down.
         </p>
         <p>
           <strong>Requirements:</strong> You need at least 2 time entries (1
@@ -506,12 +490,35 @@
         </p>
         <p>
           <strong>Rounding Examples:</strong> 2 minutes 30 seconds becomes 3
-          minutes, 2 minutes 1 second becomes 3 minutes, but 2 minutes 0 seconds
-          stays 2 minutes.
+          minutes, but 2 minutes 15 seconds becomes 2 minutes.
         </p>
         <p>
           <strong>Automatic Copy:</strong> The summary is automatically copied
           to your clipboard for easy sharing.
+        </p>
+
+        <h3>💾 Data Persistence</h3>
+        <p>
+          <strong>Automatic Saving:</strong> All your time entries are
+          automatically saved to your browser's local storage after every
+          change. This means your data persists even if you refresh the page,
+          close the browser, or restart your device.
+        </p>
+        <p>
+          <strong>No Data Loss:</strong> Unlike many web applications, you won't
+          lose your work if you accidentally refresh the page or if your browser
+          crashes. Your time tracking data will be restored exactly as you left
+          it.
+        </p>
+        <p>
+          <strong>Privacy-First:</strong> All data is stored locally on your
+          device - nothing is sent to external servers. Your time tracking
+          information remains completely private and under your control.
+        </p>
+        <p>
+          <strong>Browser-Specific:</strong> Data is tied to your specific
+          browser and device. If you switch browsers or devices, you'll start
+          with a fresh tracker (this ensures your data remains secure).
         </p>
 
         <h3>📸 Taking a Screenshot</h3>
@@ -564,17 +571,19 @@
           </li>
         </ul>
 
-        <h3>🔄 Resetting Data</h3>
+        <h3>🔄 Clearing Data</h3>
         <p>
-          <strong>Reset All:</strong> Clears all time entries and returns the
-          tracker to its initial state. This action cannot be undone.
+          <strong>Clear:</strong> Clears all time entries and returns the
+          tracker to its initial state. This action cannot be undone and will
+          permanently delete all saved data from your browser's local storage.
         </p>
 
         <h3>🌙 Theme Options</h3>
         <p>
           <strong>Dark/Light Mode:</strong> Click the theme toggle button in the
           bottom-right corner to switch between dark and light modes. Your
-          preference is automatically saved.
+          preference is automatically saved and will be remembered for future
+          sessions.
         </p>
 
         <h3>💡 Contact</h3>
@@ -596,272 +605,72 @@
       let clickIndex = 0;
       let currentEdit = { row: null, col: null };
 
-      // Theme toggle functionality
-      const themeToggle = document.getElementById("theme-toggle");
-      const body = document.body;
-
-      // Check for saved theme preference or default to dark mode
-      const savedTheme = localStorage.getItem("theme") || "dark";
-      body.setAttribute("data-theme", savedTheme);
-      updateThemeToggleText(savedTheme);
-
-      themeToggle.addEventListener("click", () => {
-        const currentTheme = body.getAttribute("data-theme") || "light";
-        const newTheme = currentTheme === "dark" ? "light" : "dark";
-
-        body.setAttribute("data-theme", newTheme);
-        localStorage.setItem("theme", newTheme);
-        updateThemeToggleText(newTheme);
-      });
-
-      function updateThemeToggleText(theme) {
-        themeToggle.textContent =
-          theme === "dark" ? "☀️ Light Mode" : "🌙 Dark Mode";
-      }
-
-      function validateTimeOrder(newTime, logIndex) {
-        // Check if the new time is chronologically valid
-        if (logIndex > 0 && newTime <= logs[logIndex - 1]) {
-          return false; // Time must be after the previous log
-        }
-        if (logIndex < logs.length - 1 && newTime >= logs[logIndex + 1]) {
-          return false; // Time must be before the next log
-        }
-        return true;
-      }
-
-      function createDeleteCellButton(rowIndex, colIndex) {
-        const deleteBtn = document.createElement("button");
-        deleteBtn.innerHTML = "✕";
-        deleteBtn.className = "delete-cell-btn";
-        deleteBtn.title = "Delete cell";
-
-        deleteBtn.onclick = () => {
-          const logIndex = rowIndex * 2 + colIndex;
-          logs[logIndex] = null; // Mark as deleted
-
-          const cell = document.getElementById(`cell-${rowIndex}-${colIndex}`);
-          cell.textContent = "00:00:00";
-          cell.className = "cell deleted-cell";
-          // Ensure buttons are re-appended to be clickable and in correct order
-          cell.appendChild(createDeleteCellButton(rowIndex, colIndex));
-          cell.appendChild(createEditButton(rowIndex, colIndex));
-
-          // Check if both cells in this row are deleted
-          const startLogIndex = rowIndex * 2;
-          const endLogIndex = rowIndex * 2 + 1;
-
-          if (logs[startLogIndex] === null && logs[endLogIndex] === null) {
-            // Both cells are deleted, remove the entire row
-            const wrapper = document.getElementById(`wrapper-${rowIndex}`);
-            if (wrapper) {
-              wrapper.remove();
-              // Remove the deleted entries from logs array
-              logs.splice(startLogIndex, 2);
-              // Reindex all rows and adjust clickIndex
-              reindexRows();
-              clickIndex = logs.length;
-            }
-          }
+      // Data persistence functions
+      function saveToLocalStorage() {
+        const data = {
+          logs: logs.map((log) => (log ? log.toISOString() : null)),
+          clickIndex: clickIndex,
+          timestamp: Date.now(),
         };
-
-        return deleteBtn;
+        localStorage.setItem("timeTrackerData", JSON.stringify(data));
       }
 
-      function createEditButton(rowIndex, colIndex) {
-        const editBtn = document.createElement("button");
-        editBtn.innerHTML = "✎";
-        editBtn.className = "edit-btn";
-        editBtn.title = "Edit time";
+      function loadFromLocalStorage() {
+        try {
+          const savedData = localStorage.getItem("timeTrackerData");
+          if (!savedData) return false;
 
-        editBtn.onclick = () => {
-          currentEdit.row = rowIndex;
-          currentEdit.col = colIndex;
-          document.getElementById("overlay").style.display = "block";
-          document.getElementById("editModal").style.display = "block";
+          const data = JSON.parse(savedData);
+          logs = data.logs.map((log) => (log ? new Date(log) : null));
+          clickIndex = data.clickIndex || 0;
 
-          const logIndex = rowIndex * 2 + colIndex;
-          if (logs[logIndex] === null) {
-            // If cell is deleted, start with current time
-            document.getElementById("editTime").value = new Date()
-              .toTimeString()
-              .slice(0, 8);
-          } else {
-            document.getElementById("editTime").value = logs[logIndex]
-              .toTimeString()
-              .slice(0, 8);
-          }
-        };
-
-        return editBtn;
+          return true;
+        } catch (error) {
+          console.error("Error loading saved data:", error);
+          return false;
+        }
       }
 
-      function createDeleteRowButton(rowIndex) {
-        const deleteBtn = document.createElement("button");
-        deleteBtn.textContent = "Delete Row";
-        deleteBtn.className = "btn-small delete-btn";
-        deleteBtn.dataset.index = rowIndex;
-
-        deleteBtn.onclick = () => {
-          const wrapper = document.getElementById(`wrapper-${rowIndex}`);
-          if (wrapper) wrapper.remove();
-          const start = rowIndex * 2;
-          logs.splice(start, 2);
-          reindexRows();
-          clickIndex = logs.length;
-        };
-
-        return deleteBtn;
-      }
-
-      function reindexRows() {
-        const wrappers = document.querySelectorAll(".row-wrapper");
-        wrappers.forEach((wrapper, i) => {
-          wrapper.id = `wrapper-${i}`;
-          const row = wrapper.querySelector(".row");
-          row.id = `row-${i}`;
-
-          const cells = row.querySelectorAll(".cell");
-          cells.forEach((cell, j) => {
-            cell.id = `cell-${i}-${j}`;
-            // Re-create and re-append buttons to ensure correct z-index and event listeners
-            // Remove existing buttons first to avoid duplicates
-            cell
-              .querySelectorAll(".edit-btn, .delete-cell-btn")
-              .forEach((btn) => btn.remove());
-
-            // Re-append to maintain correct order and clickability
-            cell.appendChild(createDeleteCellButton(i, j));
-            cell.appendChild(createEditButton(i, j));
-          });
-
-          const deleteBtn = wrapper.querySelector(".delete-btn");
-          if (deleteBtn) {
-            deleteBtn.dataset.index = i;
-            deleteBtn.onclick = createDeleteRowButton(i).onclick;
-          }
-        });
-      }
-
-      document.getElementById("btnTimestamp").addEventListener("click", () => {
-        const now = new Date();
-
-        if (logs.length > 0 && now <= logs[logs.length - 1]) {
-          alert(
-            "Error: New time entry cannot be earlier than or equal to the previous logged time.\nPlease wait or manually adjust the previous entry."
-          );
-          return;
-        }
-
-        logs.push(now);
-
-        let rowIndex = Math.floor(clickIndex / 2);
-        let colIndex = clickIndex % 2;
-
-        if (colIndex === 0 && clickIndex >= 2) {
-          const row = document.createElement("div");
-          row.className = "row";
-          row.id = `row-${rowIndex}`;
-
-          const cell1 = document.createElement("div");
-          cell1.className = "cell";
-          cell1.id = `cell-${rowIndex}-0`;
-
-          const cell2 = document.createElement("div");
-          cell2.className = "cell";
-          cell2.id = `cell-${rowIndex}-1`;
-
-          row.appendChild(cell1);
-          row.appendChild(cell2);
-
-          const wrapper = document.createElement("div");
-          wrapper.className = "row-wrapper";
-          wrapper.id = `wrapper-${rowIndex}`;
-          wrapper.appendChild(row);
-
-          const container = document.getElementById("container");
-          container.insertBefore(wrapper, container.lastElementChild);
-        }
-
-        const cell = document.getElementById(`cell-${rowIndex}-${colIndex}`);
-        if (cell) {
-          cell.textContent = now.toLocaleTimeString();
-          cell.className = "cell";
-          cell.appendChild(createDeleteCellButton(rowIndex, colIndex));
-          cell.appendChild(createEditButton(rowIndex, colIndex));
-        }
-
-        clickIndex++;
-      });
-
-      document.getElementById("btnTotal").addEventListener("click", () => {
-        const textarea = document.getElementById("totalResult");
-        const message = document.getElementById("copyMessage");
-        const container = document.getElementById("resultContainer");
-
-        if (logs.length < 2) {
-          alert("At least 2 time logs are required.");
-          return;
-        }
-
-        if (logs.length % 2 !== 0) {
-          alert(
-            "Error: Each start time must have its corresponding end time.\nComplete the last entry before calculating the total."
-          );
-          return;
-        }
-
-        const hasDeletedCells = logs.some((log) => log === null);
-        if (hasDeletedCells) {
-          alert(
-            "Error: Cannot calculate total with deleted cells.\nPlease edit all red 00:00:00 entries before calculating the total."
-          );
-          return;
-        }
-
-        let totalMinutes = 0;
-        let summary = "Time Summary:\n";
-
-        for (let i = 0; i < logs.length - 1; i += 2) {
-          const start = logs[i];
-          const end = logs[i + 1];
-
-          if (!start || !end) continue;
-
-          const diffMs = end - start;
-          // Calculate minutes and seconds
-          const diffMinutes = Math.floor(diffMs / 60000);
-          const diffSeconds = Math.floor((diffMs % 60000) / 1000);
-
-          // Round up to the nearest minute if there are any seconds
-          const roundedMinutes =
-            diffSeconds > 0 ? diffMinutes + 1 : diffMinutes;
-
-          totalMinutes += roundedMinutes;
-
-          summary += `${start.toLocaleTimeString()} - ${end.toLocaleTimeString()} → ${roundedMinutes} min\n`;
-        }
-
-        summary += `\nTotal accumulated: ${totalMinutes} minutes`;
-
-        textarea.value = summary;
-        container.style.display = "block";
-
-        textarea.select();
-        document.execCommand("copy");
-
-        message.textContent = "✅ Summary copied to clipboard";
-        setTimeout(() => (message.textContent = ""), 3000);
-      });
-
-      document.getElementById("btnReset").addEventListener("click", () => {
-        if (!confirm("Are you sure you want to delete everything and restart?"))
-          return;
-
-        const container = document.getElementById("container");
+      function rebuildUIFromData() {
         document
           .querySelectorAll(".row-wrapper")
           .forEach((wrapper) => wrapper.remove());
+
+        if (logs.length === 0) {
+          createInitialRow();
+          return;
+        }
+
+        const numRows = Math.ceil(logs.length / 2);
+
+        for (let rowIndex = 0; rowIndex < numRows; rowIndex++) {
+          createRowAtIndex(rowIndex);
+
+          for (let colIndex = 0; colIndex < 2; colIndex++) {
+            const logIndex = rowIndex * 2 + colIndex;
+            if (logIndex < logs.length) {
+              const cell = document.getElementById(
+                `cell-${rowIndex}-${colIndex}`
+              );
+              if (cell) {
+                if (logs[logIndex] === null) {
+                  cell.textContent = "00:00:00";
+                  cell.className = "cell deleted-cell";
+                } else {
+                  cell.textContent = logs[logIndex].toLocaleTimeString();
+                  cell.className = "cell";
+                }
+
+                cell.appendChild(createDeleteCellButton(rowIndex, colIndex));
+                cell.appendChild(createEditButton(rowIndex, colIndex));
+              }
+            }
+          }
+        }
+      }
+
+      function createInitialRow() {
+        const container = document.getElementById("container");
 
         const initialWrapper = document.createElement("div");
         initialWrapper.className = "row-wrapper";
@@ -889,71 +698,392 @@
         } else {
           container.appendChild(initialWrapper);
         }
+      }
 
-        logs = [];
-        clickIndex = 0;
-        document.getElementById("totalResult").textContent = "";
-        document.getElementById("copyMessage").textContent = "";
-        document.getElementById("resultContainer").style.display = "none";
-        document.getElementById("instructionsSection").style.display = "none";
+      function createRowAtIndex(rowIndex) {
+        const container = document.getElementById("container");
+
+        const row = document.createElement("div");
+        row.className = "row";
+        row.id = `row-${rowIndex}`;
+
+        const cell1 = document.createElement("div");
+        cell1.className = "cell";
+        cell1.id = `cell-${rowIndex}-0`;
+
+        const cell2 = document.createElement("div");
+        cell2.className = "cell";
+        cell2.id = `cell-${rowIndex}-1`;
+
+        row.appendChild(cell1);
+        row.appendChild(cell2);
+
+        const wrapper = document.createElement("div");
+        wrapper.className = "row-wrapper";
+        wrapper.id = `wrapper-${rowIndex}`;
+        wrapper.appendChild(row);
+
+        const singleColumnDiv = document.querySelector(".single-column");
+        if (singleColumnDiv) {
+          container.insertBefore(wrapper, singleColumnDiv);
+        } else {
+          container.appendChild(wrapper);
+        }
+      }
+
+      function initializeApp() {
+        const dataLoaded = loadFromLocalStorage();
+        if (dataLoaded) {
+          rebuildUIFromData();
+          console.log("Data loaded from localStorage");
+        } else {
+          logs = [];
+          clickIndex = 0;
+          createInitialRow();
+          console.log("Starting with fresh data");
+        }
+      }
+
+      function autoSave() {
+        saveToLocalStorage();
+      }
+
+      function clearSavedData() {
+        localStorage.removeItem("timeTrackerData");
+        console.log("Saved data cleared");
+      }
+
+      // Theme toggle functionality
+      const themeToggle = document.getElementById("theme-toggle");
+      const body = document.body;
+
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      body.setAttribute("data-theme", savedTheme);
+      updateThemeToggleText(savedTheme);
+
+      themeToggle.addEventListener("click", () => {
+        const currentTheme = body.getAttribute("data-theme") || "light";
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+        body.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+        updateThemeToggleText(newTheme);
       });
 
-      document.getElementById("saveEdit").addEventListener("click", () => {
-        const input = document.getElementById("editTime").value;
-        if (!input) return;
+      function updateThemeToggleText(theme) {
+        themeToggle.textContent =
+          theme === "dark" ? "☀️ Light Mode" : "🌙 Dark Mode";
+      }
 
-        const [h, m, s] = input.split(":").map(Number);
-        const date = new Date();
-        date.setHours(h, m, s || 0, 0);
+      // Initialize the app with saved data
+      initializeApp();
 
-        const logIndex = currentEdit.row * 2 + currentEdit.col;
+      function validateTimeOrder(newTime, logIndex) {
+        if (logIndex > 0 && newTime <= logs[logIndex - 1]) {
+          return false;
+        }
+        if (logIndex < logs.length - 1 && newTime >= logs[logIndex + 1]) {
+          return false;
+        }
+        return true;
+      }
 
-        if (!validateTimeOrder(date, logIndex)) {
-          alert(
-            "Error: Time must be chronologically ordered.\nEach time entry must be later than the previous one and earlier than the next one."
+      function createDeleteCellButton(rowIndex, colIndex) {
+        const deleteBtn = document.createElement("button");
+        deleteBtn.innerHTML = "✕";
+        deleteBtn.className = "delete-cell-btn";
+        deleteBtn.title = "Delete cell";
+
+        deleteBtn.onclick = () => {
+          const logIndex = rowIndex * 2 + colIndex;
+          logs[logIndex] = null;
+
+          const cell = document.getElementById(
+            `cell-${rowIndex}-${colIndex}`
+          );
+          cell.textContent = "00:00:00";
+          cell.className = "cell deleted-cell";
+
+          cell.appendChild(createDeleteCellButton(rowIndex, colIndex));
+          cell.appendChild(createEditButton(rowIndex, colIndex));
+
+          const startLogIndex = rowIndex * 2;
+          const endLogIndex = rowIndex * 2 + 1;
+
+          if (logs[startLogIndex] === null && logs[endLogIndex] === null) {
+            const wrapper = document.getElementById(`wrapper-${rowIndex}`);
+            if (wrapper) {
+              wrapper.remove();
+              logs.splice(startLogIndex, 2);
+              reindexRows();
+              clickIndex = logs.length;
+            }
+          }
+
+          autoSave();
+        };
+
+        return deleteBtn;
+      }
+
+      function createEditButton(rowIndex, colIndex) {
+        const editBtn = document.createElement("button");
+        editBtn.innerHTML = "✎";
+        editBtn.className = "edit-btn";
+        editBtn.title = "Edit time";
+
+        editBtn.onclick = () => {
+          currentEdit.row = rowIndex;
+          currentEdit.col = colIndex;
+          document.getElementById("overlay").style.display = "block";
+          document.getElementById("editModal").style.display = "block";
+
+          const logIndex = rowIndex * 2 + colIndex;
+          if (logs[logIndex] === null) {
+            document.getElementById("editTime").value = new Date()
+              .toTimeString()
+              .slice(0, 8);
+          } else {
+            document.getElementById("editTime").value = logs[logIndex]
+              .toTimeString()
+              .slice(0, 8);
+          }
+        };
+
+        return editBtn;
+      }
+
+      function reindexRows() {
+        const wrappers = document.querySelectorAll(".row-wrapper");
+        wrappers.forEach((wrapper, i) => {
+          wrapper.id = `wrapper-${i}`;
+          const row = wrapper.querySelector(".row");
+          row.id = `row-${i}`;
+
+          const cells = row.querySelectorAll(".cell");
+          cells.forEach((cell, j) => {
+            cell.id = `cell-${i}-${j}`;
+            cell
+              .querySelectorAll(".edit-btn, .delete-cell-btn")
+              .forEach((btn) => btn.remove());
+
+            cell.appendChild(createDeleteCellButton(i, j));
+            cell.appendChild(createEditButton(i, j));
+          });
+        });
+      }
+
+      document.getElementById("btnTimestamp").addEventListener("click", () => {
+        const now = new Date();
+
+        if (logs.length > 0 && now <= logs[logs.length - 1]) {
+          // Use a message box instead of alert()
+          showMessage(
+            "Error: New time entry cannot be earlier than or equal to the previous logged time. Please wait or manually adjust the previous entry."
           );
           return;
         }
 
-        logs[logIndex] = date;
+        logs.push(now);
 
-        const cell = document.getElementById(
-          `cell-${currentEdit.row}-${currentEdit.col}`
-        );
-        cell.textContent = date.toLocaleTimeString();
-        cell.className = "cell";
-        cell
-          .querySelectorAll(".edit-btn, .delete-cell-btn")
-          .forEach((btn) => btn.remove());
-        cell.appendChild(
-          createDeleteCellButton(currentEdit.row, currentEdit.col)
-        );
-        cell.appendChild(createEditButton(currentEdit.row, currentEdit.col));
+        let rowIndex = Math.floor(clickIndex / 2);
+        let colIndex = clickIndex % 2;
 
-        document.getElementById("editModal").style.display = "none";
-        document.getElementById("overlay").style.display = "none";
+        if (colIndex === 0 && clickIndex >= 2) {
+          createRowAtIndex(rowIndex);
+        }
+
+        const cell = document.getElementById(`cell-${rowIndex}-${colIndex}`);
+        if (cell) {
+          cell.textContent = now.toLocaleTimeString();
+          cell.className = "cell";
+          cell.appendChild(createDeleteCellButton(rowIndex, colIndex));
+          cell.appendChild(createEditButton(rowIndex, colIndex));
+        }
+
+        clickIndex++;
+        autoSave();
       });
 
-      document.getElementById("btnHelp").addEventListener("click", () => {
-        const instructionsSection = document.getElementById(
-          "instructionsSection"
+      document.getElementById("btnTotal").addEventListener("click", () => {
+        const textarea = document.getElementById("totalResult");
+        const message = document.getElementById("copyMessage");
+        const container = document.getElementById("resultContainer");
+
+        if (logs.length < 2) {
+          showMessage("At least 2 time logs are required.");
+          return;
+        }
+
+        if (logs.length % 2 !== 0) {
+          showMessage(
+            "Error: Each start time must have its corresponding end time.\nComplete the last entry before calculating the total."
+          );
+          return;
+        }
+
+        const hasDeletedCells = logs.some((log) => log === null);
+        if (hasDeletedCells) {
+          showMessage(
+            "Error: Cannot calculate total with deleted cells.\nPlease edit all red 00:00:00 entries before calculating the total."
+          );
+          return;
+        }
+
+        let totalMinutes = 0;
+        let summary = "Time Summary:\n";
+
+        for (let i = 0; i < logs.length - 1; i += 2) {
+          const start = logs[i];
+          const end = logs[i + 1];
+
+          if (!start || !end) continue;
+
+          const diffMs = end - start;
+          const diffInMinutes = diffMs / 60000;
+          const roundedMinutes = Math.round(diffInMinutes);
+
+          totalMinutes += roundedMinutes;
+
+          summary += `${start.toLocaleTimeString()} - ${end.toLocaleTimeString()} → ${roundedMinutes} min\n`;
+        }
+
+        summary += `\nTotal accumulated: ${totalMinutes} minutes`;
+
+        textarea.value = summary;
+        container.style.display = "block";
+
+        const tempInput = document.createElement("textarea");
+        tempInput.value = summary;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+
+        message.textContent = "Copied to clipboard!";
+        setTimeout(() => {
+          message.textContent = "";
+        }, 3000);
+      });
+
+      document.getElementById("btnReset").addEventListener("click", () => {
+        const resetConfirmed = showConfirm(
+          "Are you sure you want to clear all data? This action cannot be undone."
         );
-        if (
-          instructionsSection.style.display === "none" ||
-          instructionsSection.style.display === ""
-        ) {
-          instructionsSection.style.display = "block";
-          document.getElementById("btnHelp").textContent = "Hide Help";
+        if (resetConfirmed) {
+          clearSavedData();
+          logs = [];
+          clickIndex = 0;
+          rebuildUIFromData(); // Rebuilds the UI with an empty state
+          document.getElementById("totalResult").value = "";
+          document.getElementById("resultContainer").style.display = "none";
+        }
+      });
+      
+      // Modal for editing
+      document.getElementById("saveEdit").addEventListener("click", () => {
+        const newTimeStr = document.getElementById("editTime").value;
+        if (!newTimeStr) {
+          showMessage("Please enter a valid time.");
+          return;
+        }
+
+        const logIndex = currentEdit.row * 2 + currentEdit.col;
+        const [h, m, s] = newTimeStr.split(":").map(Number);
+        
+        let newTime = new Date(logs[logIndex] || new Date());
+        newTime.setHours(h, m, s, 0);
+
+        if (validateTimeOrder(newTime, logIndex)) {
+          logs[logIndex] = newTime;
+          const cell = document.getElementById(`cell-${currentEdit.row}-${currentEdit.col}`);
+          cell.textContent = newTime.toLocaleTimeString();
+          cell.className = "cell";
+          cell.appendChild(createDeleteCellButton(currentEdit.row, currentEdit.col));
+          cell.appendChild(createEditButton(currentEdit.row, currentEdit.col));
+          document.getElementById("overlay").style.display = "none";
+          document.getElementById("editModal").style.display = "none";
+          autoSave();
         } else {
-          instructionsSection.style.display = "none";
-          document.getElementById("btnHelp").textContent = "Help";
+          showMessage("Invalid time. It must be in chronological order with other entries.");
         }
       });
 
       document.getElementById("overlay").addEventListener("click", () => {
-        document.getElementById("editModal").style.display = "none";
         document.getElementById("overlay").style.display = "none";
+        document.getElementById("editModal").style.display = "none";
       });
+
+      // Help Section functionality
+      document.getElementById("btnHelp").addEventListener("click", () => {
+        const instructionsSection = document.getElementById("instructionsSection");
+        const isVisible = instructionsSection.style.display === "block";
+        instructionsSection.style.display = isVisible ? "none" : "block";
+      });
+
+      function showMessage(msg) {
+        const messageBox = document.createElement("div");
+        messageBox.style.cssText = `
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: var(--modal-bg);
+          color: var(--text-color);
+          padding: 20px;
+          border: 2px solid var(--modal-border);
+          border-radius: 8px;
+          z-index: 2000;
+          box-shadow: 0 0 10px rgba(0,0,0,0.5);
+          text-align: center;
+          max-width: 80%;
+        `;
+        messageBox.innerHTML = `
+          <p>${msg}</p>
+          <button style="margin-top: 10px;" onclick="this.parentElement.remove();">OK</button>
+        `;
+        document.body.appendChild(messageBox);
+      }
+
+      function showConfirm(msg) {
+        const confirmBox = document.createElement("div");
+        confirmBox.style.cssText = `
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: var(--modal-bg);
+          color: var(--text-color);
+          padding: 20px;
+          border: 2px solid var(--modal-border);
+          border-radius: 8px;
+          z-index: 2000;
+          box-shadow: 0 0 10px rgba(0,0,0,0.5);
+          text-align: center;
+          max-width: 80%;
+        `;
+        confirmBox.innerHTML = `
+          <p>${msg}</p>
+          <button style="margin-top: 10px;" id="confirmYes">Yes</button>
+          <button style="margin-top: 10px; margin-left: 10px;" id="confirmNo">No</button>
+        `;
+        
+        let result = false;
+        
+        const promise = new Promise((resolve) => {
+          document.body.appendChild(confirmBox);
+          document.getElementById('confirmYes').onclick = () => {
+            confirmBox.remove();
+            resolve(true);
+          };
+          document.getElementById('confirmNo').onclick = () => {
+            confirmBox.remove();
+            resolve(false);
+          };
+        });
+
+        return promise;
+      }
     </script>
   </body>
 </html>
