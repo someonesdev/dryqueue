@@ -1,188 +1,183 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Registro de Tiempos</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        background: #f5f5f5;
-      }
-      h1 {
-        text-align: center;
-      }
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-        background: #fff;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
-      th,
-      td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        text-align: center;
-      }
-      th {
-        background: #eee;
-      }
-      button {
-        margin: 5px;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 5px;
-        background: #007bff;
-        color: #fff;
-        cursor: pointer;
-      }
-      button:hover {
-        background: #0056b3;
-      }
-      #controls {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      #resultContainer {
-        margin-top: 20px;
-        text-align: center;
-        display: none;
-      }
-      #totalResult {
-        font-weight: bold;
-        font-size: 16px;
-        width: 100%;
-        padding: 10px;
-      }
-      #copyMessage {
-        margin-top: 10px;
-        color: green;
-        font-weight: bold;
-      }
-      tbody {
-        display: block;
-        max-height: 400px;
-        overflow-y: auto;
-      }
-      thead,
-      tbody tr {
-        display: table;
-        width: 100%;
-        table-layout: fixed;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Registro de Tiempos</h1>
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Tiempos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f5f5f5;
+    }
+    h1 {
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background: #eee;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      background: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    #controls {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #resultContainer {
+      margin-top: 20px;
+      text-align: center;
+      display: none;
+    }
+    #totalResult {
+      font-weight: bold;
+      font-size: 16px;
+      width: 100%;
+      padding: 10px;
+    }
+    #copyMessage {
+      margin-top: 10px;
+      color: green;
+      font-weight: bold;
+    }
+    tbody {
+      display: block;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    thead, tbody tr {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+  </style>
+</head>
+<body>
+  <h1>Registro de Tiempos</h1>
 
-    <div id="controls">
-      <button id="btnHora">Hora</button>
-      <button id="btnTotal">Total</button>
-    </div>
+  <div id="controls">
+    <button id="btnHora">Hora</button>
+    <button id="btnTotal">Total</button>
+  </div>
 
-    <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Hora</th>
-        </tr>
-      </thead>
-      <tbody id="logTableBody"></tbody>
-    </table>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Hora</th>
+      </tr>
+    </thead>
+    <tbody id="logTableBody"></tbody>
+  </table>
 
-    <div id="resultContainer">
-      <textarea id="totalResult" readonly></textarea>
-      <div id="copyMessage"></div>
-    </div>
+  <div id="resultContainer">
+    <textarea id="totalResult" readonly></textarea>
+    <div id="copyMessage"></div>
+  </div>
 
-    <script>
-      let logs = [];
-      let clickIndex = 0;
+  <script>
+    let logs = [];
+    let clickIndex = 0;
 
-      // --- Formatear con ceros delante ---
-      function pad(num) {
-        return num.toString().padStart(2, "0");
-      }
+    // --- Formatear con ceros delante ---
+    function pad(num) {
+      return num.toString().padStart(2, "0");
+    }
 
-      // --- Obtener hora actual con segundos ---
-      function getCurrentTime() {
-        const now = new Date();
-        return `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(
-          now.getSeconds()
-        )}`;
-      }
+    // --- Obtener hora actual con segundos ---
+    function getCurrentTime() {
+      const now = new Date();
+      return `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+    }
 
-      // --- Insertar nueva fila con la hora ---
-      function addLog(time) {
-        logs.push(time);
-        clickIndex++;
+    // --- Insertar nueva fila con la hora ---
+    function addLog(time) {
+      logs.push(time);
+      clickIndex++;
 
-        const tbody = document.getElementById("logTableBody");
-        const row = document.createElement("tr");
+      const tbody = document.getElementById("logTableBody");
+      const row = document.createElement("tr");
 
-        row.innerHTML = `
+      row.innerHTML = `
         <td>${clickIndex}</td>
         <td>${time}</td>
       `;
 
-        tbody.appendChild(row);
+      tbody.appendChild(row);
 
-        // Scroll automático hacia la última fila
-        row.scrollIntoView({ behavior: "smooth", block: "end" });
+      // Scroll automático hacia la última fila
+      row.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+
+    // --- Diferencia en segundos entre dos tiempos ---
+    function timeDiffInSeconds(start, end) {
+      const [sh, sm, ss] = start.split(":").map(Number);
+      const [eh, em, es] = end.split(":").map(Number);
+
+      const startSec = sh * 3600 + sm * 60 + ss;
+      const endSec = eh * 3600 + em * 60 + es;
+
+      return endSec - startSec;
+    }
+
+    // --- Botón HORA ---
+    document.getElementById("btnHora").addEventListener("click", () => {
+      const time = getCurrentTime();
+      addLog(time);
+    });
+
+    // --- Botón TOTAL ---
+    document.getElementById("btnTotal").addEventListener("click", () => {
+      if (logs.length < 2) {
+        alert("Necesitas al menos un par de tiempos.");
+        return;
       }
 
-      // --- Diferencia en segundos entre dos tiempos ---
-      function timeDiffInSeconds(start, end) {
-        const [sh, sm, ss] = start.split(":").map(Number);
-        const [eh, em, es] = end.split(":").map(Number);
-
-        const startSec = sh * 3600 + sm * 60 + ss;
-        const endSec = eh * 3600 + em * 60 + es;
-
-        return endSec - startSec;
+      let totalSeconds = 0;
+      for (let i = 0; i < logs.length; i += 2) {
+        const start = logs[i];
+        const end = logs[i + 1];
+        if (!start || !end) continue;
+        totalSeconds += timeDiffInSeconds(start, end);
       }
 
-      // --- Botón HORA ---
-      document.getElementById("btnHora").addEventListener("click", () => {
-        const time = getCurrentTime();
-        addLog(time);
+      // Calcular total exacto
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+      const roundedMinutes = seconds >= 30 ? minutes + 1 : minutes;
+
+      // Mostrar resultado
+      const resultText = `Total: ${roundedMinutes} minutos (tiempo exacto: ${minutes}m ${seconds}s)`;
+      document.getElementById("totalResult").value = resultText;
+      document.getElementById("resultContainer").style.display = "block";
+
+      // Copiar automáticamente
+      navigator.clipboard.writeText(resultText).then(() => {
+        document.getElementById("copyMessage").innerText = "✅ Copiado al portapapeles";
+        setTimeout(() => {
+          document.getElementById("copyMessage").innerText = "";
+        }, 2000);
       });
-
-      // --- Botón TOTAL ---
-      document.getElementById("btnTotal").addEventListener("click", () => {
-        if (logs.length < 2) {
-          alert("Necesitas al menos un par de tiempos.");
-          return;
-        }
-
-        let totalSeconds = 0;
-        for (let i = 0; i < logs.length; i += 2) {
-          const start = logs[i];
-          const end = logs[i + 1];
-          if (!start || !end) continue;
-          totalSeconds += timeDiffInSeconds(start, end);
-        }
-
-        // Calcular total exacto
-        const minutes = Math.floor(totalSeconds / 60);
-        const seconds = totalSeconds % 60;
-        const roundedMinutes = seconds >= 30 ? minutes + 1 : minutes;
-
-        // Mostrar resultado
-        const resultText = `Total: ${roundedMinutes} minutos (tiempo exacto: ${minutes}m ${seconds}s)`;
-        document.getElementById("totalResult").value = resultText;
-        document.getElementById("resultContainer").style.display = "block";
-
-        // Copiar automáticamente
-        navigator.clipboard.writeText(resultText).then(() => {
-          document.getElementById("copyMessage").innerText =
-            "✅ Copiado al portapapeles";
-          setTimeout(() => {
-            document.getElementById("copyMessage").innerText = "";
-          }, 2000);
-        });
-      });
-    </script>
-  </body>
+    });
+  </script>
+</body>
 </html>
