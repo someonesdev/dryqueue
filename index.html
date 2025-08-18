@@ -619,7 +619,7 @@
       function formatDuration(totalSeconds) {
         const m = Math.floor(totalSeconds / 60);
         const s = totalSeconds % 60;
-
+        
         if (totalSeconds < 60) {
           return `${s} sec`;
         } else {
@@ -938,9 +938,9 @@
 
         // --- Scroll automático al final de la página después del timestamp ---
         setTimeout(() => {
-          window.scrollTo({
-            top: document.body.scrollHeight,
-            behavior: "smooth",
+          window.scrollTo({ 
+            top: document.body.scrollHeight, 
+            behavior: 'smooth' 
           });
         }, 100);
       });
@@ -986,9 +986,7 @@
           totalSeconds += durationSeconds;
 
           // Mostrar duración con el nuevo formato
-          summary += `${start.toLocaleTimeString()} - ${end.toLocaleTimeString()} → ${formatDuration(
-            durationSeconds
-          )}\n`;
+          summary += `${start.toLocaleTimeString()} - ${end.toLocaleTimeString()} → ${formatDuration(durationSeconds)}\n`;
         }
 
         // Redondeo solo UNA vez al final
@@ -1012,6 +1010,14 @@
         setTimeout(() => {
           message.textContent = "";
         }, 3000);
+
+        // --- Scroll automático al final de la página después de mostrar el total ---
+        setTimeout(() => {
+          window.scrollTo({ 
+            top: document.body.scrollHeight, 
+            behavior: 'smooth' 
+          });
+        }, 100);
       });
 
       // === Corregido: confirm asíncrono ===
