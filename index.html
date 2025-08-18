@@ -427,6 +427,7 @@
       <h2>📋 How to Use the Time Tracker</h2>
 
       <div>
+
         <h3>🕐 Logging Time</h3>
         <p>
           <strong>Timestamp Button:</strong> Click the "Timestamp" button to
@@ -441,8 +442,9 @@
 
         <h3>✏️ Editing Times</h3>
         <p>
-          <strong>Edit Button (✎):</strong> Click the **pencil icon** in the
-          top-right corner of any cell to edit that specific time entry.
+          <strong>Edit Button (✎):</strong> Click the
+          **pencil icon** in the top-right corner of any cell to edit that
+          specific time entry.
         </p>
         <p>
           <strong>Precision Editing:</strong> You can edit times down to the
@@ -603,6 +605,16 @@
       let clickIndex = 0;
       let currentEdit = { row: null, col: null };
 
+      // --- Helpers ---
+      const pad2 = (n) => String(n).padStart(2, "0");
+
+      function msToMinSec(ms) {
+        const totalSec = Math.max(0, Math.floor(ms / 1000));
+        const m = Math.floor(totalSec / 60);
+        const s = totalSec % 60;
+        return { m, s };
+      }
+
       // Data persistence functions
       function saveToLocalStorage() {
         const data = {
@@ -664,6 +676,12 @@
               }
             }
           }
+        }
+
+        // --- Autoscroll al final tras reconstruir ---
+        const lastWrapper = document.getElementById(`wrapper-${numRows - 1}`);
+        if (lastWrapper) {
+          lastWrapper.scrollIntoView({ behavior: "smooth", block: "end" });
         }
       }
 
@@ -796,7 +814,9 @@
           const logIndex = rowIndex * 2 + colIndex;
           logs[logIndex] = null;
 
-          const cell = document.getElementById(`cell-${rowIndex}-${colIndex}`);
+          const cell = document.getElementById(
+            `cell-${rowIndex}-${colIndex}`
+          );
           cell.textContent = "00:00:00";
           cell.className = "cell deleted-cell";
 
@@ -897,10 +917,17 @@
           cell.appendChild(createEditButton(rowIndex, colIndex));
         }
 
+        // --- Autoscroll a la última fila/celda creada/actualizada ---
+        const wrapper = document.getElementById(`wrapper-${rowIndex}`);
+        if (wrapper) {
+          wrapper.scrollIntoView({ behavior: "smooth", block: "end" });
+        }
+
         clickIndex++;
         autoSave();
       });
 
+      // === MODIFICADO: redondeo solo al final ===
       document.getElementById("btnTotal").addEventListener("click", () => {
         const textarea = document.getElementById("totalResult");
         const message = document.getElementById("copyMessage");
@@ -926,29 +953,36 @@
           return;
         }
 
-        let totalMinutes = 0;
+        let totalSeconds = 0;
         let summary = "Time Summary:\n";
 
         for (let i = 0; i < logs.length - 1; i += 2) {
           const start = logs[i];
           const end = logs[i + 1];
-
           if (!start || !end) continue;
 
           const diffMs = end - start;
-          const diffInMinutes = diffMs / 60000;
-          const roundedMinutes = Math.round(diffInMinutes);
+          const { m, s } = msToMinSec(diffMs);
 
-          totalMinutes += roundedMinutes;
+          // Acumular en segundos (sin redondeo por par)
+          totalSeconds += Math.floor(diffMs / 1000);
 
-          summary += `${start.toLocaleTimeString()} - ${end.toLocaleTimeString()} → ${roundedMinutes} min\n`;
+          // Mostrar duración exacta por par
+          summary += `${start.toLocaleTimeString()} - ${end.toLocaleTimeString()} → ${m} min ${pad2(s)} sec\n`;
         }
 
-        summary += `\nTotal accumulated: ${totalMinutes} minutes`;
+        // Redondeo solo UNA vez al final
+        const roundedTotalMinutes = Math.round(totalSeconds / 60);
+        const totalExactMin = Math.floor(totalSeconds / 60);
+        const totalExactSec = totalSeconds % 60;
+
+        summary += `\nTotal exact: ${totalExactMin} min ${pad2(totalExactSec)} sec`;
+        summary += `\nTotal (rounded to minutes): ${roundedTotalMinutes} minutes`;
 
         textarea.value = summary;
         container.style.display = "block";
 
+        // Copiar al portapapeles (mantengo tu método para compatibilidad)
         const tempInput = document.createElement("textarea");
         tempInput.value = summary;
         document.body.appendChild(tempInput);
@@ -962,8 +996,9 @@
         }, 3000);
       });
 
-      document.getElementById("btnReset").addEventListener("click", () => {
-        const resetConfirmed = showConfirm(
+      // === Corregido: confirm asíncrono ===
+      document.getElementById("btnReset").addEventListener("click", async () => {
+        const resetConfirmed = await showConfirm(
           "Are you sure you want to clear all data? This action cannot be undone."
         );
         if (resetConfirmed) {
@@ -973,9 +1008,13 @@
           rebuildUIFromData(); // Rebuilds the UI with an empty state
           document.getElementById("totalResult").value = "";
           document.getElementById("resultContainer").style.display = "none";
+
+          // Autoscroll al inicio (opcional)
+          const top = document.getElementById("wrapper-0");
+          if (top) top.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       });
-
+      
       // Modal for editing
       document.getElementById("saveEdit").addEventListener("click", () => {
         const newTimeStr = document.getElementById("editTime").value;
@@ -986,28 +1025,26 @@
 
         const logIndex = currentEdit.row * 2 + currentEdit.col;
         const [h, m, s] = newTimeStr.split(":").map(Number);
-
+        
         let newTime = new Date(logs[logIndex] || new Date());
         newTime.setHours(h, m, s, 0);
 
         if (validateTimeOrder(newTime, logIndex)) {
           logs[logIndex] = newTime;
-          const cell = document.getElementById(
-            `cell-${currentEdit.row}-${currentEdit.col}`
-          );
+          const cell = document.getElementById(`cell-${currentEdit.row}-${currentEdit.col}`);
           cell.textContent = newTime.toLocaleTimeString();
           cell.className = "cell";
-          cell.appendChild(
-            createDeleteCellButton(currentEdit.row, currentEdit.col)
-          );
+          cell.appendChild(createDeleteCellButton(currentEdit.row, currentEdit.col));
           cell.appendChild(createEditButton(currentEdit.row, currentEdit.col));
           document.getElementById("overlay").style.display = "none";
           document.getElementById("editModal").style.display = "none";
           autoSave();
+
+          // Autoscroll a la fila editada (opcional)
+          const wrapper = document.getElementById(`wrapper-${currentEdit.row}`);
+          if (wrapper) wrapper.scrollIntoView({ behavior: "smooth", block: "center" });
         } else {
-          showMessage(
-            "Invalid time. It must be in chronological order with other entries."
-          );
+          showMessage("Invalid time. It must be in chronological order with other entries.");
         }
       });
 
@@ -1018,9 +1055,7 @@
 
       // Help Section functionality
       document.getElementById("btnHelp").addEventListener("click", () => {
-        const instructionsSection = document.getElementById(
-          "instructionsSection"
-        );
+        const instructionsSection = document.getElementById("instructionsSection");
         const isVisible = instructionsSection.style.display === "block";
         instructionsSection.style.display = isVisible ? "none" : "block";
       });
@@ -1071,16 +1106,14 @@
           <button style="margin-top: 10px;" id="confirmYes">Yes</button>
           <button style="margin-top: 10px; margin-left: 10px;" id="confirmNo">No</button>
         `;
-
-        let result = false;
-
+        
         const promise = new Promise((resolve) => {
           document.body.appendChild(confirmBox);
-          document.getElementById("confirmYes").onclick = () => {
+          document.getElementById('confirmYes').onclick = () => {
             confirmBox.remove();
             resolve(true);
           };
-          document.getElementById("confirmNo").onclick = () => {
+          document.getElementById('confirmNo').onclick = () => {
             confirmBox.remove();
             resolve(false);
           };
