@@ -477,9 +477,11 @@
         <h3>📊 Calculating Totals</h3>
         <p>
           <strong>TOTAL Button:</strong> Click to calculate the total dry queue
-          time across all logged sessions. Time is automatically rounded to the
-          nearest minute: 30 seconds or more rounds up to the next minute, while
-          less than 30 seconds rounds down.
+          time across all logged sessions. Duration display format: if the time
+          is less than 60 seconds, it shows as seconds only. If it's 60 seconds
+          or more, it shows as minutes and seconds. Time is automatically
+          rounded to the nearest minute: 30 seconds or more rounds up to the
+          next minute, while less than 30 seconds rounds down.
         </p>
         <p>
           <strong>Requirements:</strong> You need at least 2 time entries (1
@@ -611,6 +613,18 @@
         const m = Math.floor(totalSec / 60);
         const s = totalSec % 60;
         return { m, s };
+      }
+
+      // Función para formatear duración según las nuevas reglas
+      function formatDuration(totalSeconds) {
+        const m = Math.floor(totalSeconds / 60);
+        const s = totalSeconds % 60;
+
+        if (totalSeconds < 60) {
+          return `${s} sec`;
+        } else {
+          return `${m} min ${pad2(s)} sec`;
+        }
       }
 
       // Data persistence functions
@@ -921,9 +935,17 @@
 
         clickIndex++;
         autoSave();
+
+        // --- Scroll automático al final de la página después del timestamp ---
+        setTimeout(() => {
+          window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth",
+          });
+        }, 100);
       });
 
-      // === MODIFICADO: redondeo solo al final ===
+      // === MODIFICADO: redondeo solo al final y nuevo formato de duración ===
       document.getElementById("btnTotal").addEventListener("click", () => {
         const textarea = document.getElementById("totalResult");
         const message = document.getElementById("copyMessage");
@@ -958,25 +980,21 @@
           if (!start || !end) continue;
 
           const diffMs = end - start;
-          const { m, s } = msToMinSec(diffMs);
+          const durationSeconds = Math.floor(diffMs / 1000);
 
           // Acumular en segundos (sin redondeo por par)
-          totalSeconds += Math.floor(diffMs / 1000);
+          totalSeconds += durationSeconds;
 
-          // Mostrar duración exacta por par
-          summary += `${start.toLocaleTimeString()} - ${end.toLocaleTimeString()} → ${m} min ${pad2(
-            s
-          )} sec\n`;
+          // Mostrar duración con el nuevo formato
+          summary += `${start.toLocaleTimeString()} - ${end.toLocaleTimeString()} → ${formatDuration(
+            durationSeconds
+          )}\n`;
         }
 
         // Redondeo solo UNA vez al final
         const roundedTotalMinutes = Math.round(totalSeconds / 60);
-        const totalExactMin = Math.floor(totalSeconds / 60);
-        const totalExactSec = totalSeconds % 60;
 
-        summary += `\nTotal exact: ${totalExactMin} min ${pad2(
-          totalExactSec
-        )} sec`;
+        summary += `\nTotal exact: ${formatDuration(totalSeconds)}`;
         summary += `\nTotal (rounded to minutes): ${roundedTotalMinutes} minutes`;
 
         textarea.value = summary;
