@@ -928,55 +928,7 @@
       });
 
       // === MODIFICADO: redondeo solo al final ===
-// --- Botón TOTAL ---
-document.getElementById("btnTotal").addEventListener("click", () => {
-  if (logs.length < 2) {
-    alert("Necesitas al menos un par de tiempos.");
-    return;
-  }
-
-  let totalSeconds = 0;
-  let summary = "";
-
-  for (let i = 0; i < logs.length; i += 2) {
-    const start = logs[i];
-    const end = logs[i + 1];
-    if (!start || !end) continue;
-
-    const diffSec = timeDiffInSeconds(start, end);
-    totalSeconds += diffSec;
-
-    // Mostrar duración legible
-    let durationText;
-    if (diffSec < 60) {
-      durationText = `${diffSec} segundos`;
-    } else {
-      const m = Math.floor(diffSec / 60);
-      const s = diffSec % 60;
-      durationText = `${m}m ${s}s`;
-    }
-
-    summary += `#${i/2 + 1}: ${start} → ${end} = ${durationText}\n`;
-  }
-
-  // Redondeo al final
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
-  const roundedMinutes = seconds >= 30 ? minutes + 1 : minutes;
-
-  // Resultado final
-  const resultText = `${summary}\nTOTAL: ${roundedMinutes} minutos (tiempo exacto: ${minutes}m ${seconds}s)`;
-  document.getElementById("totalResult").value = resultText;
-  document.getElementById("resultContainer").style.display = "block";
-
-  // Copiar automáticamente
-  navigator.clipboard.writeText(resultText).then(() => {
-    document.getElementById("copyMessage").innerText = "✅ Copiado al portapapeles";
-    setTimeout(() => {
-      document.getElementById("copyMessage").innerText = "";
-    }, 2000);
-  });
-});
+      document.getElementById("btnTotal").addEventListener("click", () => {
         const textarea = document.getElementById("totalResult");
         const message = document.getElementById("copyMessage");
         const container = document.getElementById("resultContainer");
