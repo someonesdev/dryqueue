@@ -125,8 +125,8 @@
 
       tbody.appendChild(row);
 
-      // Scroll automático a la última fila
-      row.scrollIntoView({ behavior: "smooth", block: "end" });
+      // Scroll automático al final de la página
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
     }
 
     // --- Diferencia en segundos entre dos tiempos ---
@@ -164,14 +164,18 @@
         const diffSec = timeDiffInSeconds(start, end);
         totalSeconds += diffSec;
 
-        // --- Mejora: formato minutos+segundos o solo segundos ---
+        // --- Formato: solo seg si <60, min+seg si >=60 ---
         let durationText;
         if (diffSec < 60) {
           durationText = `${diffSec} segundos`;
         } else {
           const m = Math.floor(diffSec / 60);
           const s = diffSec % 60;
-          durationText = `${m}m ${s}s`;
+          if (s === 0) {
+            durationText = `${m}m`;
+          } else {
+            durationText = `${m}m ${s}s`;
+          }
         }
 
         summary += `#${i/2 + 1}: ${start} → ${end} = ${durationText}\n`;
@@ -193,6 +197,9 @@
           document.getElementById("copyMessage").innerText = "";
         }, 2000);
       });
+
+      // Scroll automático al final de la página
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
     });
 
     // --- Botón CLEAR ---
