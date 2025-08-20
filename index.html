@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -442,8 +441,8 @@
 
         <h3>✏️ Editing Times</h3>
         <p>
-          <strong>Edit Button (✎):</strong> Click the <em>pencil icon</em> in the
-          top-right corner of any cell to edit that specific time entry.
+          <strong>Edit Button (✎):</strong> Click the <em>pencil icon</em> in
+          the top-right corner of any cell to edit that specific time entry.
         </p>
         <p>
           <strong>Precision Editing:</strong> You can edit times down to the
@@ -457,11 +456,12 @@
 
         <h3>🗑️ Deleting Entries</h3>
         <p>
-          <strong>Delete Cell (✕):</strong> Click the red X next to
-          the edit button to delete a specific time entry.
+          <strong>Delete Cell (✕):</strong> Click the red X next to the edit
+          button to delete a specific time entry.
         </p>
         <p>
-          <strong>Deleted State:</strong> Deleted cells show red "00:00:00" text.
+          <strong>Deleted State:</strong> Deleted cells show red "00:00:00"
+          text.
         </p>
         <p>
           <strong>Auto Row Removal:</strong> If both cells in a row (start and
@@ -920,7 +920,9 @@
           if (durationSeconds >= QUALIFY_SECONDS) {
             totalSeconds += durationSeconds;
             qualifyingCount++;
-            summary += `${start.toLocaleTimeString()} - ${end.toLocaleTimeString()} → ${formatDuration(durationSeconds)}\n`;
+            summary += `${start.toLocaleTimeString()} - ${end.toLocaleTimeString()} → ${formatDuration(
+              durationSeconds
+            )}\n`;
           }
         }
 
@@ -1092,7 +1094,21 @@
 
         return promise;
       }
+      let lastSpaceTime = 0;
+
+      document.addEventListener("keydown", function (e) {
+        if (e.code === "Space") {
+          e.preventDefault(); // prevents page scrolling on space
+          let now = Date.now();
+
+          if (now - lastSpaceTime < 400) {
+            // double tap detected
+            document.getElementById("timestamp").click();
+          }
+
+          lastSpaceTime = now;
+        }
+      });
     </script>
   </body>
 </html>
-
