@@ -438,11 +438,17 @@
           in pairs (Start → End). The first click logs a start time, the second
           click logs an end time, and so on.
         </p>
+        <p>
+          <strong>Keyboard Shortcut:</strong> Press the <em>spacebar twice quickly</em>
+          (double-tap) anywhere on the page to add a timestamp — it does the same
+          as clicking the "Timestamp" button. The shortcut is ignored while you’re
+          typing inside inputs (like the Edit time field).
+        </p>
 
         <h3>✏️ Editing Times</h3>
         <p>
-          <strong>Edit Button (✎):</strong> Click the <em>pencil icon</em> in
-          the top-right corner of any cell to edit that specific time entry.
+          <strong>Edit Button (✎):</strong> Click the <strong>pencil icon</strong> in the
+          top-right corner of any cell to edit that specific time entry.
         </p>
         <p>
           <strong>Precision Editing:</strong> You can edit times down to the
@@ -456,69 +462,138 @@
 
         <h3>🗑️ Deleting Entries</h3>
         <p>
-          <strong>Delete Cell (✕):</strong> Click the red X next to the edit
-          button to delete a specific time entry.
+          <strong>Delete Cell (✕):</strong> Click the <strong>red X button</strong> next to
+          the edit button to delete a specific time entry.
         </p>
         <p>
-          <strong>Deleted State:</strong> Deleted cells show red "00:00:00"
-          text.
+          <strong>Deleted State:</strong> Deleted cells show red "00:00:00" text
+          to indicate they need attention.
         </p>
         <p>
           <strong>Auto Row Removal:</strong> If both cells in a row (start and
-          end time) are deleted, the entire row will automatically disappear.
+          end time) are deleted, the entire row will automatically disappear to
+          keep the interface clean.
         </p>
         <p>
           <strong>Restoration:</strong> Click the edit button on a deleted cell
-          to restore it with a new time value.
+          to restore it with a new time value. Note: If both cells in a row are
+          deleted, the row disappears and cannot be restored.
         </p>
 
         <h3>📊 Calculating Totals</h3>
         <p>
-          <strong>TOTAL Button:</strong> Shows a summary of pairs whose duration
-          is <strong>at least 3 minutes</strong>. Durations under 3 minutes are
-          omitted from the summary.
+          <strong>TOTAL Button:</strong> Click to calculate the total dry queue
+          time across all logged sessions <em>that are 3 minutes or longer</em>.
+          The summary list and totals include only entries with duration
+          <strong>≥ 3:00</strong>.
         </p>
         <p>
-          <strong>Display format:</strong> if the time is less than 60 seconds,
-          it shows as seconds only; if it's 60 seconds or more, it shows as
-          minutes and seconds.
-        </p>
-        <p>
-          <strong>Rounding:</strong> Rounding to minutes happens only on the
-          final total (30s+ rounds up; &lt;30s rounds down).
+          <strong>Display format:</strong> if a single entry is less than
+          60 seconds, it shows as seconds only; otherwise it shows minutes and
+          seconds. Rounding is applied <em>only</em> to the final total:
+          30 seconds or more rounds up to the next minute; less than 30 seconds
+          rounds down.
         </p>
         <p>
           <strong>Requirements:</strong> You need at least 2 time entries (1
-          complete pair) and there must be no red 00:00:00 entries.
+          complete pair), all entries must have valid times (no red 00:00:00),
+          and each start time must have its corresponding end time.
         </p>
         <p>
           <strong>Automatic Copy:</strong> The summary is automatically copied
-          to your clipboard.
+          to your clipboard for easy sharing.
         </p>
 
         <h3>💾 Data Persistence</h3>
         <p>
           <strong>Automatic Saving:</strong> All your time entries are
           automatically saved to your browser's local storage after every
-          change.
+          change. This means your data persists even if you refresh the page,
+          close the browser, or restart your device.
+        </p>
+        <p>
+          <strong>No Data Loss:</strong> Unlike many web applications, you won't
+          lose your work if you accidentally refresh the page or if your browser
+          crashes. Your time tracking data will be restored exactly as you left
+          it.
         </p>
         <p>
           <strong>Privacy-First:</strong> All data is stored locally on your
-          device.
+          device - nothing is sent to external servers. Your time tracking
+          information remains completely private and under your control.
+        </p>
+        <p>
+          <strong>Browser-Specific:</strong> Data is tied to your specific
+          browser and device. If you switch browsers or devices, you'll start
+          with a fresh tracker (this ensures your data remains secure).
         </p>
 
         <h3>📸 Taking a Screenshot</h3>
-        <p>Use your OS tools to take screenshots (Windows/Mac guides below).</p>
+        <p>
+          While this tool doesn't have a built-in screenshot feature (for your
+          security and privacy), you can easily take a screenshot using your
+          operating system's tools:
+        </p>
+        <ul>
+          <li>
+            <strong>Windows:</strong>
+            <ul>
+              <li>
+                <strong>Full Screen:</strong> Press <code>PrtSc</code> (Print
+                Screen) key. The screenshot will be saved to your clipboard. You
+                can paste it into an image editor (like Paint) or directly into
+                a document.
+              </li>
+              <li>
+                <strong>Specific Window:</strong> Press <code>Alt + PrtSc</code>.
+                This captures only the active window to your clipboard.
+              </li>
+              <li>
+                <strong>Custom Area (Snipping Tool):</strong> Press
+                <code>Windows key + Shift + S</code>. This opens the Snipping
+                Tool, allowing you to drag and select a specific area of your
+                screen. The image is saved to your clipboard.
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>Mac:</strong>
+            <ul>
+              <li>
+                <strong>Full Screen:</strong> Press
+                <code>Shift + Command (⌘) + 3</code>. The screenshot is saved to
+                your desktop.
+              </li>
+              <li>
+                <strong>Selected Portion:</strong> Press
+                <code>Shift + Command (⌘) + 4</code>. Your cursor changes to a
+                crosshair, allowing you to drag and select the area you want to
+                capture. The image is saved to your desktop.
+              </li>
+              <li>
+                <strong>Specific Window:</strong> Press
+                <code>Shift + Command (⌘) + 4</code>, then press the
+                <code>Spacebar</code>. Your cursor changes to a camera icon.
+                Click on the window you want to capture. The image is saved to
+                your desktop.
+              </li>
+            </ul>
+          </li>
+        </ul>
 
         <h3>🔄 Clearing Data</h3>
         <p>
           <strong>Clear:</strong> Clears all time entries and returns the
-          tracker to its initial state.
+          tracker to its initial state. This action cannot be undone and will
+          permanently delete all saved data from your browser's local storage.
         </p>
 
         <h3>🌙 Theme Options</h3>
         <p>
-          <strong>Dark/Light Mode:</strong> Toggle at the bottom-right corner.
+          <strong>Dark/Light Mode:</strong> Click the theme toggle button in the
+          bottom-right corner to switch between dark and light modes. Your
+          preference is automatically saved and will be remembered for future
+          sessions.
         </p>
 
         <h3>💡 Contact</h3>
@@ -539,7 +614,6 @@
       let logs = [];
       let clickIndex = 0;
       let currentEdit = { row: null, col: null };
-      const QUALIFY_SECONDS = 180; // 3 minutes
 
       // --- Helpers ---
       const pad2 = (n) => String(n).padStart(2, "0");
@@ -551,10 +625,11 @@
         return { m, s };
       }
 
-      // Format duration (no rounding)
+      // Función para formatear duración según las nuevas reglas
       function formatDuration(totalSeconds) {
         const m = Math.floor(totalSeconds / 60);
         const s = totalSeconds % 60;
+
         if (totalSeconds < 60) {
           return `${s} sec`;
         } else {
@@ -625,7 +700,7 @@
           }
         }
 
-        // Autoscroll to last
+        // --- Autoscroll al final tras reconstruir ---
         const lastWrapper = document.getElementById(`wrapper-${numRows - 1}`);
         if (lastWrapper) {
           lastWrapper.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -716,7 +791,7 @@
         console.log("Saved data cleared");
       }
 
-      // Theme toggle
+      // Theme toggle functionality
       const themeToggle = document.getElementById("theme-toggle");
       const body = document.body;
 
@@ -738,7 +813,7 @@
           theme === "dark" ? "☀️ Light Mode" : "🌙 Dark Mode";
       }
 
-      // Initialize app
+      // Initialize the app with saved data
       initializeApp();
 
       function validateTimeOrder(newTime, logIndex) {
@@ -834,10 +909,12 @@
         });
       }
 
-      document.getElementById("btnTimestamp").addEventListener("click", () => {
+      // ========= Timestamp logic extracted into a function =========
+      function addTimestamp() {
         const now = new Date();
 
         if (logs.length > 0 && now <= logs[logs.length - 1]) {
+          // Use a message box instead of alert()
           showMessage(
             "Error: New time entry cannot be earlier than or equal to the previous logged time. Please wait or manually adjust the previous entry."
           );
@@ -861,7 +938,7 @@
           cell.appendChild(createEditButton(rowIndex, colIndex));
         }
 
-        // Autoscroll to last updated row
+        // --- Autoscroll a la última fila/celda creada/actualizada ---
         const wrapper = document.getElementById(`wrapper-${rowIndex}`);
         if (wrapper) {
           wrapper.scrollIntoView({ behavior: "smooth", block: "end" });
@@ -870,15 +947,19 @@
         clickIndex++;
         autoSave();
 
+        // --- Scroll automático al final de la página después del timestamp ---
         setTimeout(() => {
           window.scrollTo({
             top: document.body.scrollHeight,
             behavior: "smooth",
           });
         }, 100);
-      });
+      }
 
-      // === Summary filtered to only entries >= 3 minutes (180 seconds) ===
+      // Button still works (kept per your request)
+      document.getElementById("btnTimestamp").addEventListener("click", addTimestamp);
+
+      // === TOTAL (with >= 3:00 filter) ===
       document.getElementById("btnTotal").addEventListener("click", () => {
         const textarea = document.getElementById("totalResult");
         const message = document.getElementById("copyMessage");
@@ -904,9 +985,9 @@
           return;
         }
 
-        let totalSeconds = 0; // total of qualifying entries only
-        let qualifyingCount = 0;
-        let summary = "Time Summary (>= 3 min only):\n";
+        let totalSeconds = 0; // total only of entries >= 3 minutes
+        let shownCount = 0;
+        let summary = "Time Summary (≥ 3:00):\n";
 
         for (let i = 0; i < logs.length - 1; i += 2) {
           const start = logs[i];
@@ -916,25 +997,26 @@
           const diffMs = end - start;
           const durationSeconds = Math.floor(diffMs / 1000);
 
-          // Only include and totalize entries 3 minutes or longer
-          if (durationSeconds >= QUALIFY_SECONDS) {
+          // Only include entries 3 minutes or longer
+          if (durationSeconds >= 180) {
             totalSeconds += durationSeconds;
-            qualifyingCount++;
             summary += `${start.toLocaleTimeString()} - ${end.toLocaleTimeString()} → ${formatDuration(
               durationSeconds
             )}\n`;
+            shownCount++;
           }
         }
 
-        if (qualifyingCount === 0) {
-          summary += "No entries qualify.\n";
+        // If nothing qualifies, still show totals as zero
+        if (shownCount === 0) {
+          summary += "(No entries of 3 minutes or more)\n";
         }
 
         // Round only once at the end
         const roundedTotalMinutes = Math.round(totalSeconds / 60);
 
-        summary += `\nTotal exact (>=3 min): ${formatDuration(totalSeconds)}`;
-        summary += `\nTotal (rounded to minutes, >=3 min): ${roundedTotalMinutes} minutes`;
+        summary += `\nTotal exact: ${formatDuration(totalSeconds)}`;
+        summary += `\nTotal (rounded to minutes): ${roundedTotalMinutes} minutes`;
 
         textarea.value = summary;
         container.style.display = "block";
@@ -952,6 +1034,7 @@
           message.textContent = "";
         }, 3000);
 
+        // --- Scroll automático al final de la página después de mostrar el total ---
         setTimeout(() => {
           window.scrollTo({
             top: document.body.scrollHeight,
@@ -960,7 +1043,7 @@
         }, 100);
       });
 
-      // === Confirm async ===
+      // === Corregido: confirm asíncrono ===
       document
         .getElementById("btnReset")
         .addEventListener("click", async () => {
@@ -971,10 +1054,11 @@
             clearSavedData();
             logs = [];
             clickIndex = 0;
-            rebuildUIFromData();
+            rebuildUIFromData(); // Rebuilds the UI with an empty state
             document.getElementById("totalResult").value = "";
             document.getElementById("resultContainer").style.display = "none";
 
+            // Autoscroll al inicio (opcional)
             const top = document.getElementById("wrapper-0");
             if (top) top.scrollIntoView({ behavior: "smooth", block: "start" });
           }
@@ -1009,6 +1093,7 @@
           document.getElementById("editModal").style.display = "none";
           autoSave();
 
+          // Autoscroll a la fila editada (opcional)
           const wrapper = document.getElementById(`wrapper-${currentEdit.row}`);
           if (wrapper)
             wrapper.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -1024,7 +1109,7 @@
         document.getElementById("editModal").style.display = "none";
       });
 
-      // Help Section toggle
+      // Help Section functionality
       document.getElementById("btnHelp").addEventListener("click", () => {
         const instructionsSection = document.getElementById(
           "instructionsSection"
@@ -1094,18 +1179,27 @@
 
         return promise;
       }
+
+      // ====== Double-Space Shortcut (keeps button working too) ======
       let lastSpaceTime = 0;
+      document.addEventListener("keydown", (e) => {
+        if (e.code !== "Space") return;
 
-      document.addEventListener("keydown", function (e) {
-        if (e.code === "Space") {
-          e.preventDefault(); // prevents page scrolling on space
-          let now = Date.now();
+        // Don't hijack if typing inside inputs/textarea/contentEditable
+        const t = e.target;
+        const isEditable =
+          t.tagName === "INPUT" ||
+          t.tagName === "TEXTAREA" ||
+          t.isContentEditable;
+        if (isEditable) return;
 
-          if (now - lastSpaceTime < 400) {
-            // double tap detected
-            document.getElementById("timestamp").click();
-          }
+        e.preventDefault(); // prevents page scrolling on space
 
+        const now = Date.now();
+        if (now - lastSpaceTime < 400) {
+          addTimestamp(); // double tap detected
+          lastSpaceTime = 0; // reset to avoid triple-trigger
+        } else {
           lastSpaceTime = now;
         }
       });
