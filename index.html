@@ -483,7 +483,7 @@
         <h3>📊 Calculating Totals</h3>
         <p>
           <strong>TOTAL Button:</strong> Click to calculate the total dry queue
-          time across all logged sessions <em>that are 3 minutes or longer</em>.
+          time across all logged sessions <em>that are 1.30 minutes or longer</em>.
           The summary list and totals include only entries with duration
           <strong>≥ 3:00</strong>.
         </p>
@@ -987,7 +987,7 @@
 
         let totalSeconds = 0; // total only of entries >= 3 minutes
         let shownCount = 0;
-        let summary = "Time Summary (≥ 3:00):\n";
+        let summary = "Time Summary (≥ 1:30):\n";
 
         for (let i = 0; i < logs.length - 1; i += 2) {
           const start = logs[i];
@@ -997,8 +997,8 @@
           const diffMs = end - start;
           const durationSeconds = Math.floor(diffMs / 1000);
 
-          // Only include entries 3 minutes or longer
-          if (durationSeconds >= 180) {
+          // Only include entries 1.30 minutes or longer
+          if (durationSeconds >= 90) {
             totalSeconds += durationSeconds;
             summary += `${start.toLocaleTimeString()} - ${end.toLocaleTimeString()} → ${formatDuration(
               durationSeconds
@@ -1009,7 +1009,7 @@
 
         // If nothing qualifies, still show totals as zero
         if (shownCount === 0) {
-          summary += "(No entries of 3 minutes or more)\n";
+          summary += "(No entries of 1.5 minutes or more)\n";
         }
 
         // Round only once at the end
